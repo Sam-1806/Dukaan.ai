@@ -12,7 +12,7 @@ sheet_name = "Superstore"
 
 # Read the Excel file & Model
 df = pd.read_excel(excel_file, sheet_name=sheet_name, usecols='A:U')
-with open('C:/Users/V-Code/Desktop/Dukaan.ai-main/model_discount .pkl', 'rb') as model_file:
+with open('Dukaan.ai-main/model_discount .pkl', 'rb') as model_file:
     model_discount, scaler = pickle.load(model_file)
 
 #<--------------------------------Titile-------------------------------------->
