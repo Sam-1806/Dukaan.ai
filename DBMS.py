@@ -1,9 +1,19 @@
 import pandas as pd
+import numpy as np
 import streamlit as st
 import plotly.express as px
 import pickle
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from sklearn.preprocessing import StandardScaler
+import tensorflow as tf
+
+
 # Set page title and favicon
 st.set_page_config(page_title="Dukaan.ai Dashboard", page_icon="",layout="wide")
 
@@ -12,7 +22,7 @@ sheet_name = "Superstore"
 
 # Read the Excel file & Model
 df = pd.read_excel(excel_file, sheet_name=sheet_name, usecols='A:U')
-with open('Dukaan.ai-main/model_discount .pkl', 'rb') as model_file:
+with open('model_discount .pkl', 'rb') as model_file:
     model_discount, scaler = pickle.load(model_file)
 
 #<--------------------------------Titile-------------------------------------->
@@ -169,3 +179,57 @@ elif navigation == "Predictive Analytics":
           st.success(f"Predicted Discount Rate: {predicted_discount:.2f}")
         except Exception as e:
          st.error(f"Error: {e}")
+
+
+
+st.title("Demand Forecasting")
+# Load the trained model from the H5 file
+
+
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = tf.keras.models.load_model("C:/Users/Samruddhi/Downloads/demand-forecast.h5")
+    return model
+
+model = load_model()
+
+categories = ["Shirt", "Shoes", "Groceries", "Pants", "Dresses"]
+category_images = {
+    "Shirt": "src\chart_1.png" ,
+    "Shoes": "src\chart_4.png",
+    "Groceries": "src\chart_5.png",
+    "Pants": "src\chart_2.png",
+    "Dresses": "src\chart_3.png",
+}
+
+selected_category = st.selectbox("Select Category", categories)
+if selected_category in category_images:
+    image_path = category_images[selected_category]
+    st.image(image_path, caption=f"Forecasted Demand for {selected_category}", use_column_width=True)
+else:
+    st.write("No forecast available for the selected category.")
+
+
+if st.button("Predict Demand"):
+    st.write("Predicting demand...")
+
+    
+year = st.number_input("Year", min_value=2015, max_value=2025)
+month = st.number_input("Month", min_value=1, max_value=12)
+
+# Create a DataFrame with the input data
+input_data = pd.DataFrame({'Year': [year], 'Month': [month]})
+print("Shape of input data:", input_data.shape)
+
+# Ensure the input data has the correct shape
+#input_data = input_data.to_numpy().reshape((1, 12, 1))
+
+
+# Make predictions
+#if st.button("Predict Demand"):
+    #prediction = model.predict(input_data)
+    #st.write(f"Predicted demand: {prediction[0][0]}")
+
+
+
+
