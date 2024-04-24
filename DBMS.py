@@ -1,13 +1,12 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
-import plotly.express as px
+import plotly as px
 import pickle
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
