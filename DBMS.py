@@ -200,6 +200,8 @@ category_images = {
     "Pants": "src\chart_2.png",
     "Dresses": "src\chart_3.png",
 }
+predicted_sales_image_path = "src\sales_forecast.jpg"
+st.image(predicted_sales_image_path, caption='Predicted Sales Visualization', use_column_width=True)
 
 selected_category = st.selectbox("Select Category", categories)
 if selected_category in category_images:
